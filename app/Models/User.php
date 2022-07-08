@@ -23,6 +23,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function canAccessFilament(): bool
+    {
+        return true;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
