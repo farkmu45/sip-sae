@@ -68,12 +68,14 @@ class AnthropometryChart extends ScatterChartWidget
             $data = [];
         }
 
+        $age = $measurement->student->age;
+        $ageMonth = $measurement->student->ageMonth;
         array_push($datasets, [
             'label' => 'IMT',
             'data' => [
                 [
                     'y' => $measurement->imt,
-                    'x' => 8
+                    'x' => (float) "$age.$ageMonth"
                 ]
             ],
             'pointRadius' => 8,
