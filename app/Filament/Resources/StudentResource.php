@@ -65,6 +65,8 @@ class StudentResource extends Resource
                             Select::make('classroom_id')
                                 ->relationship('classroom', 'name')
                                 ->label(__('text.classroom'))
+                                ->searchable()
+                                ->preload()
                                 ->required(),
                             Radio::make('gender')
                                 ->label(__('text.gender'))
@@ -84,6 +86,8 @@ class StudentResource extends Resource
                         Select::make('job_id')
                             ->relationship('job', 'name')
                             ->label(__('text.job'))
+                            ->searchable()
+                            ->preload()
                             ->required()
                             ->createOptionForm(
                                 [
