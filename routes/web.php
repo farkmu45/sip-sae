@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\MaleAnthropometry;
+use App\Models\NutritionMeasurement;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -14,15 +16,3 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/test', function () {
-    return MaleAnthropometry::where('month', '=', 0)
-    ->orWhere([
-        ['month', '=', 1],
-        ['year', '=', 5],
-    ])
-    ->orWhere('month', '=', 3)
-    ->orWhere('month', '=', 6)
-    ->orWhere('month', '=', 9)
-    ->get();
-});

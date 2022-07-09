@@ -17,11 +17,4 @@ class EditNutritionMeasurement extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
-    protected function getFooterWidgets(): array
-    {
-        return [
-            AnthropometryChart::class
-        ];
-    }
 }

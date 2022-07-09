@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\NutritionMeasurementResource\Pages;
 
 use App\Filament\Resources\NutritionMeasurementResource;
+use App\Filament\Resources\NutritionMeasurementResource\Widgets\AnthropometryChart;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 

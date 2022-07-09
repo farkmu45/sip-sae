@@ -1,27 +1,39 @@
 <?php
 
-namespace App\Filament\Resources\NutritionMeasurementResource\Widgets;
+namespace App\Filament\Widgets;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Enums\Gender;
 use App\Models\MaleAnthropometry;
-use Filament\Widgets\LineChartWidget;
+use App\Models\NutritionMeasurement;
+use Carbon\Carbon;
 use Filament\Widgets\ScatterChartWidget;
 
-class AnthropometryChart extends ScatterChartWidget
+class MaleAnthropometryChart extends ScatterChartWidget
 {
-    // Please refactor
     protected int | string | array $columnSpan = 'full';
     protected static ?string $pollingInterval = null;
-    public ?Model $record = null;
+    public $records = null;
+
+    public function mount()
+    {
+        $startDate = request()->start !== null ? Carbon::parse(request()->start)->startOfDay() : Carbon::now()->subDays(7);
+        $endDate = request()->end !== null ? Carbon::parse(request()->end)->endOfDay() : Carbon::now();
+        $this->records = NutritionMeasurement::whereBetween('created_at', [$startDate, $endDate])
+            ->whereHas('student', function ($q) {
+                $q->where('gender', Gender::MALE->value);
+            })
+            ->get();
+    }
 
     protected function getHeading(): string
     {
-        return 'Grafik';
+        return __('text.male_graph');
     }
 
     protected function getData(): array
     {
-        $measurement = $this->record;
+        $datasets = [];
+        $data = [];
         $sdList = [
             ['-3sd', 'black'],
             ['-2sd', '#933149'],
@@ -40,15 +52,9 @@ class AnthropometryChart extends ScatterChartWidget
             ->orWhere('month', '=', 3)
             ->orWhere('month', '=', 6)
             ->orWhere('month', '=', 9)
-            // ->orWhere([
-            //     ['year', '=', $measurement->student->age],
-            //     ['month', '=', $measurement->student->ageMonth],
-            // ])
             ->get();
 
         $anthropometryArray = collect($anthropometry);
-        $datasets = [];
-        $data = [];
 
         foreach ($sdList as $sd) {
             foreach ($anthropometryArray as $anthropometry) {
@@ -68,21 +74,24 @@ class AnthropometryChart extends ScatterChartWidget
             $data = [];
         }
 
-        $age = $measurement->student->age;
-        $ageMonth = $measurement->student->ageMonth;
-        array_push($datasets, [
-            'label' => 'IMT',
-            'data' => [
-                [
-                    'y' => $measurement->imt,
-                    'x' => (float) "$age.$ageMonth"
-                ]
-            ],
-            'pointRadius' => 8,
-            'pointBackgroundColor' => 'blue',
-            'borderColor' => 'blue',
-            'pointHoverRadius' => 10,
-        ]);
+        foreach ($this->records as $measurement) {
+            $age = $measurement->student->age;
+            $ageMonth = $measurement->student->ageMonth;
+
+            array_push($datasets, [
+                'label' => 'IMT',
+                'data' => [
+                    [
+                        'y' => $measurement->imt,
+                        'x' => (float) "$age.$ageMonth"
+                    ]
+                ],
+                'pointRadius' => 8,
+                'pointBackgroundColor' => 'blue',
+                'borderColor' => 'blue',
+                'pointHoverRadius' => 10,
+            ]);
+        }
 
         return [
             'datasets' => $datasets,
@@ -100,6 +109,11 @@ class AnthropometryChart extends ScatterChartWidget
                     'ticks' => [
                         'stepSize' => 1
                     ]
+                ]
+            ],
+            'plugins' => [
+                'legend' => [
+                    'display' => false
                 ]
             ]
         ];

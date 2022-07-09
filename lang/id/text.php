@@ -32,7 +32,10 @@ return [
     'imt' => 'IMT',
     'created_at' => 'Dibuat',
     'status' => 'Status gizi',
+    'find' => 'Cari',
+    'to' => 'sampai',
 
+    'nutritions_graph' => 'Grafik Gizi',
     'nutrition_type' => 'Jenis gizi',
     'narration' => 'Narasi',
     'classroom' => 'Kelas',
@@ -41,4 +44,6 @@ return [
     'teacher' => 'Guru',
     'teacher_data' => 'Data guru',
     'nutrition_measurement' => 'Pengukuran Gizi',
+    'male_graph' => 'Grafik siswa',
+    'female_graph' => 'Grafik siswi',
 ];
