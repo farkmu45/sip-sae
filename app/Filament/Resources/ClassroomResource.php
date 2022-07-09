@@ -62,13 +62,14 @@ class ClassroomResource extends Resource
                     ->counts('teachers'),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make()
             ]);
     }
 
@@ -87,5 +88,13 @@ class ClassroomResource extends Resource
             'create' => Pages\CreateClassroom::route('/create'),
             'edit' => Pages\EditClassroom::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }
