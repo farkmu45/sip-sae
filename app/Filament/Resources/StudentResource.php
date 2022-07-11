@@ -6,6 +6,8 @@ use App\Enums\Gender;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
+use Carbon\Carbon;
+use Closure;
 use Illuminate\Support\Str;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -61,6 +63,24 @@ class StudentResource extends Resource
                             DatePicker::make('date_of_birth')
                                 ->label(__('text.date_of_birth'))
                                 ->maxDate(now())
+                                ->rules([
+                                    fn ()
+                                    => function (string $attribute, $value, Closure $fail) {
+                                        $studentAge = Carbon::parse($value)->age;
+                                        $studentDOB =  Carbon::parse($value);
+                                        $currentDate = Carbon::parse(now());
+                                        $studentDOBConverted = $studentDOB->year($currentDate->year);
+                                        $monthDifference = $currentDate->diffInMonths($studentDOBConverted);
+
+                                        if (($studentAge >= 5 && $studentAge <= 19)) {
+                                            if ($studentAge == 5 && $monthDifference == 0 || $studentAge == 19 && $monthDifference > 0) {
+                                                $fail(__('text.invalid_age'));
+                                            }
+                                        } else {
+                                            $fail(__('text.invalid_age'));
+                                        }
+                                    }
+                                ])
                                 ->required(),
                             Select::make('classroom_id')
                                 ->relationship('classroom', 'name')

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\StudentResource\Pages;
 
 use App\Filament\Resources\StudentResource;
+use Carbon\Carbon;
+use Closure;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -38,6 +40,24 @@ class CreateStudent extends CreateRecord
                         DatePicker::make('date_of_birth')
                             ->label(__('text.date_of_birth'))
                             ->maxDate(now())
+                            ->rules([
+                                fn ()
+                                => function (string $attribute, $value, Closure $fail) {
+                                    $studentAge = Carbon::parse($value)->age;
+                                    $studentDOB =  Carbon::parse($value);
+                                    $currentDate = Carbon::parse(now());
+                                    $studentDOBConverted = $studentDOB->year($currentDate->year);
+                                    $monthDifference = $currentDate->diffInMonths($studentDOBConverted);
+
+                                    if (($studentAge >= 5 && $studentAge <= 19)) {
+                                        if ($studentAge == 5 && $monthDifference == 0 || $studentAge == 19 && $monthDifference > 0) {
+                                            $fail(__('text.invalid_age'));
+                                        }
+                                    } else {
+                                        $fail(__('text.invalid_age'));
+                                    }
+                                }
+                            ])
                             ->required(),
                         Select::make('classroom_id')
                             ->relationship('classroom', 'name')

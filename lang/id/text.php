@@ -34,6 +34,7 @@ return [
     'status' => 'Status gizi',
     'find' => 'Cari',
     'to' => 'sampai',
+    'invalid_age' => 'Umur tidak mencukupi',
 
     'nutritions_graph' => 'Grafik Gizi',
     'nutrition_type' => 'Jenis gizi',
