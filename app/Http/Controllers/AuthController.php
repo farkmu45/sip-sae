@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterPostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,22 @@ class AuthController extends Controller
 
         return [
             'data' =>
-            ['token' => $user->createToken($request->getClientIp())->plainTextToken]
+            [
+                'token' => $user->createToken($request->getClientIp())->plainTextToken
+            ]
+        ];
+    }
+
+
+    public function register(RegisterPostRequest $request)
+    {
+        $user = User::create($request->validated());
+
+        return [
+            'data' =>
+            [
+                'token' => $user->createToken($request->getClientIp())->plainTextToken
+            ]
         ];
     }
 }
