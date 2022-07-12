@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -24,8 +25,8 @@ class User extends Authenticatable
         'password'
     ];
 
-    public function student(): HasOne
+    public function student(): BelongsTo
     {
-        return $this->hasOne(Student::class, 'student_nis');
+        return $this->belongsTo(Student::class, 'student_nis');
     }
 }
