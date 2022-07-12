@@ -17,7 +17,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('nis', $request->nis)->first();
+        $user = User::where('student_nis', $request->nis)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([

@@ -14,8 +14,7 @@ class RegisterPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'nis' => 'required|unique:users|min:4|exists:students,nis',
+            'student_nis' => 'required|unique:users|min:4|exists:students,nis',
             'password' => 'required|min:6'
         ];
     }
@@ -23,7 +22,7 @@ class RegisterPostRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'nis' => 'NIS',
+            'student_nis' => 'NIS',
         ];
     }
 }
