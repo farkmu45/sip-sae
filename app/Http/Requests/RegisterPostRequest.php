@@ -15,7 +15,7 @@ class RegisterPostRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'nis' => 'required|unique:users|min:4',
+            'nis' => 'required|unique:users|min:4|exists:students,nis',
             'password' => 'required|min:6'
         ];
     }
