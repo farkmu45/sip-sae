@@ -18,10 +18,10 @@ class NarrationFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->words(3, true),
-            'content' => $this->faker->words(15, true),
+            'title' => fake()->words(3, true),
+            'content' => fake()->words(15, true),
             'picture' => "https://picsum.photos/200/300",
-            'is_published' => $this->faker->boolean()
+            'is_published' => fake()->boolean()
         ];
     }
 }

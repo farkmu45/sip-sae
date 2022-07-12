@@ -17,10 +17,10 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'nip' => $this->faker->randomNumber(5),
-            'name' => $this->faker->name(),
-            'address' => $this->faker->streetAddress(),
-            'classroom_id' => $this->faker->numberBetween(1,9)
+            'nip' => fake()->randomNumber(5),
+            'name' => fake()->name(),
+            'address' => fake()->streetAddress(),
+            'classroom_id' => fake()->numberBetween(1,9)
         ];
     }
 }

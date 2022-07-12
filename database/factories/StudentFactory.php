@@ -17,16 +17,16 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'nis' => $this->faker->randomNumber(5),
-            'name' => $this->faker->name(),
-            'address' => $this->faker->streetAddress(),
-            'date_of_birth' => $this->faker->date(),
-            'marital_status_of_parents' => $this->faker->words(2, true),
-            'school_distance' => $this->faker->randomNumber(),
-            'salary' => $this->faker->randomNumber(),
-            'job_id' => $this->faker->numberBetween(1, 9),
-            'classroom_id' => $this->faker->numberBetween(1, 9),
-            'gender' => $this->faker->randomElement(['FEMALE', 'MALE'])
+            'nis' => fake()->randomNumber(5),
+            'name' => fake()->name(),
+            'address' => fake()->streetAddress(),
+            'date_of_birth' => fake()->date(),
+            'marital_status_of_parents' => fake()->words(2, true),
+            'school_distance' => fake()->randomNumber(),
+            'salary' => fake()->randomNumber(),
+            'job_id' => fake()->numberBetween(1, 9),
+            'classroom_id' => fake()->numberBetween(1, 9),
+            'gender' => fake()->randomElement(['FEMALE', 'MALE'])
         ];
     }
 }
