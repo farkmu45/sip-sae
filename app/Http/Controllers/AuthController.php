@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterPostRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,12 +26,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return [
-            'data' =>
-            [
-                'token' => $user->createToken($request->getClientIp())->plainTextToken
-            ]
-        ];
+        return new UserResource($user);
     }
 
 
@@ -38,12 +34,7 @@ class AuthController extends Controller
     {
         $user = User::create($request->validated());
 
-        return [
-            'data' =>
-            [
-                'token' => $user->createToken($request->getClientIp())->plainTextToken
-            ]
-        ];
+        return new UserResource($user);
     }
 
     public function logout(Request $request)
