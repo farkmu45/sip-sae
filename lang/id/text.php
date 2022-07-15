@@ -35,6 +35,9 @@ return [
     'find' => 'Cari',
     'to' => 'sampai',
     'invalid_age' => 'Umur tidak mencukupi',
+    'question' => 'pertanyaan',
+    'answer' => 'jawaban',
+
 
     'nutritions_graph' => 'Grafik Gizi',
     'nutrition_type' => 'Jenis gizi',
