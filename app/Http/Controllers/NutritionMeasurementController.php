@@ -15,4 +15,11 @@ class NutritionMeasurementController extends Controller
         $data['student_nis'] = auth()->user()->student_nis;
         return new NutritionMeasurementResource(NutritionMeasurement::create($data));
     }
+
+    public function getAll()
+    {
+        return NutritionMeasurementResource::collection(
+            auth()->user()->student->measurements()->latest()->paginate(5)
+        );
+    }
 }

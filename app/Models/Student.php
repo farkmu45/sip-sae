@@ -49,8 +49,8 @@ class Student extends Model
         return $this->belongsTo(Job::class);
     }
 
-    public function measurement()
+    public function measurements()
     {
-        return $this->hasOne(NutritionMeasurement::class, 'student_nis');
+        return $this->hasMany(NutritionMeasurement::class, 'student_nis');
     }
 }

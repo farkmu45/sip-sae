@@ -24,5 +24,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/narrations', [NarrationController::class, 'getAll']);
     Route::post('/nutrition-measurements', [NutritionMeasurementController::class, 'create']);
+    Route::get('/nutrition-measurements', [NutritionMeasurementController::class, 'getAll']);
     Route::post('/questions', [QuestionController::class, 'create']);
 });
