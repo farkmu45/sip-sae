@@ -37,6 +37,10 @@ return [
     'invalid_age' => 'Umur tidak mencukupi',
     'question' => 'pertanyaan',
     'answer' => 'jawaban',
+    'start_date' => 'Tanggal awal',
+    'end_date' => 'Tanggal akhir',
+    'all_classroom' => 'Semua kelas',
+    'all_student' => 'Semua murid',
 
 
     'nutritions_graph' => 'Grafik Gizi',

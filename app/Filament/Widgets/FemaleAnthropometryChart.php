@@ -20,9 +20,20 @@ class FemaleAnthropometryChart extends ScatterChartWidget
     {
         $startDate = request()->start !== null ? Carbon::parse(request()->start)->startOfDay() : Carbon::now()->subDays(7);
         $endDate = request()->end !== null ? Carbon::parse(request()->end)->endOfDay() : Carbon::now();
+        $studentId = request()->studentId;
+        $classroomId = request()->classroomId;
+
         $this->records = NutritionMeasurement::whereBetween('created_at', [$startDate, $endDate])
-            ->whereHas('student', function ($q) {
+            ->whereHas('student', function ($q) use ($classroomId, $studentId) {
                 $q->where('gender', Gender::FEMALE->value);
+
+                if ($classroomId) {
+                    $q->where('classroom_id', $classroomId);
+                }
+
+                if ($studentId) {
+                    $q->where('nis', $studentId);
+                }
             })
             ->get();
     }
@@ -37,13 +48,13 @@ class FemaleAnthropometryChart extends ScatterChartWidget
         $datasets = [];
         $data = [];
         $sdList = [
-            ['-3sd', 'black'],
-            ['-2sd', '#933149'],
+            ['-3sd', '#302f2e'],
+            ['-2sd', '#b7556b'],
             ['-1sd', '#c79f6d'],
-            ['median', '#457c40'],
-            ['+1sd', '#c79f6d'],
-            ['+2sd', '#933149'],
-            ['+3sd', 'black']
+            ['median', '#86af8b'],
+            ['+1sd', '#deb57b'],
+            ['+2sd', '#b7556b'],
+            ['+3sd', '#302f2e']
         ];
 
         $anthropometry = FemaleAnthropometry::where('month', '=', 0)
