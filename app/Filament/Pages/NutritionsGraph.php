@@ -63,6 +63,10 @@ class NutritionsGraph extends Page
                 Select::make('classroomId')
                     ->options(Classroom::all()->pluck('name', 'id'))
                     ->placeholder(__('text.all_classroom'))
+                    ->afterStateUpdated(function (callable $set)
+                    {
+                        $set('studentId', null);
+                    })
                     ->reactive()
                     ->label(__('text.classroom')),
 
