@@ -16,8 +16,8 @@ class MaleAnthropometryChart extends ScatterChartWidget
 
     public function mount()
     {
-        $startDate = Carbon::parse(request()->start)->startOfDay();
-        $endDate = Carbon::parse(request()->end)->endOfDay();
+        $startDate = request()->start !== null ? Carbon::parse(request()->start)->startOfDay() : Carbon::now()->subDays(7);
+        $endDate = request()->end !== null ? Carbon::parse(request()->end)->endOfDay() : Carbon::now();
         $studentId = request()->studentId;
         $classroomId = request()->classroomId;
 
