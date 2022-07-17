@@ -43,11 +43,12 @@ class NarrationResource extends Resource
                 FileUpload::make('picture')
                     ->image()
                     ->maxSize(2000)
+                    ->imagePreviewHeight(400)
                     ->imageCropAspectRatio('16:9')
                     ->image()
                     ->directory('narration-images')
                     ->label(__('text.picture')),
-            ])->columnSpan(2),
+            ]),
 
             Card::make()->schema([
                 Toggle::make('is_published')
@@ -59,8 +60,8 @@ class NarrationResource extends Resource
                 RichEditor::make('content')
                     ->label(__('text.content'))
                     ->required(),
-            ])->columnSpan(4)
-        ])->columns(6);
+            ])
+        ]);
     }
 
     public static function table(Table $table): Table

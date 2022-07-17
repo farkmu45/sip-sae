@@ -68,8 +68,7 @@ class ClassroomResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make()
             ]);
     }
 
