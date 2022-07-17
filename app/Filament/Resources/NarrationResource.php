@@ -3,13 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NarrationResource\Pages;
-use App\Filament\Resources\NarrationResource\RelationManagers;
 use App\Models\Narration;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -18,10 +15,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Component;
 
 class NarrationResource extends Resource
@@ -57,7 +51,7 @@ class NarrationResource extends Resource
                 TextInput::make('title')
                     ->label(__('text.title'))
                     ->required(),
-                RichEditor::make('content')
+                Textarea::make('content')
                     ->label(__('text.content'))
                     ->required(),
             ])
