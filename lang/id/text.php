@@ -41,6 +41,11 @@ return [
     'end_date' => 'Tanggal akhir',
     'all_classroom' => 'Semua kelas',
     'all_student' => 'Semua murid',
+    'password' => 'Password',
+    'password_changed_successfully' => 'Password berhasil diubah',
+    'password_failed_to_change' => 'Password gagal diubah',
+    'change_password' => 'Ubah password',
+    'save' => 'Simpan',
 
 
     'nutritions_graph' => 'Grafik Gizi',

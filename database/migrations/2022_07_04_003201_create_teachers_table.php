@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->string('nip')->primary();
             $table->string('name', 45);
+            $table->string('email')->virtualAs("concat(nip,'@sipsae.com')");
             $table->string('address', 45);
+            $table->string('password');
+            $table->rememberToken();
         });
     }
 

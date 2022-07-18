@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'nis' => 41201510,
             'name' => 'Faruk Maulana',
             'address' => fake()->streetAddress(),
-            'date_of_birth' => fake()->date(),
+            'date_of_birth' => '2010-07-08',
             'marital_status_of_parents' => fake()->words(2, true),
             'school_distance' => 27,
             'salary' => 1500,
@@ -33,9 +33,11 @@ class DatabaseSeeder extends Seeder
             'gender' => 'MALE'
         ]);
 
-        \App\Models\Admin::create([
+        \App\Models\Teacher::create([
+            'nip' => '41201510',
+            'classroom_id' => 1,
+            'address' => fake()->streetAddress(),
             'name' => 'Faruk',
-            'email' => 'fark@admin.com',
             'password' => Hash::make('password'),
         ]);
 

@@ -3,9 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeacherResource\Pages;
-use App\Filament\Resources\TeacherResource\RelationManagers;
 use App\Models\Teacher;
-use Filament\Forms;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Str;
@@ -15,9 +14,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\MultiSelectFilter;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherResource extends Resource
 {
@@ -42,14 +40,19 @@ class TeacherResource extends Resource
             ->schema([
                 TextInput::make('nip')
                     ->label(__('text.nip'))
+                    ->unique(ignoreRecord: true)
+                    ->minLength(5)
+                    ->maxLength(5)
                     ->required(),
                 TextInput::make('name')
                     ->label(__('text.name'))
                     ->required(),
+                TextInput::make('address')
+                    ->label(__('text.address'))
+                    ->required(),
                 Select::make('classroom_id')
                     ->relationship('classroom', 'name')
                     ->label(__('text.classroom'))
-                    ->columnSpan(2)
                     ->required()
             ]);
     }
@@ -77,8 +80,29 @@ class TeacherResource extends Resource
                     ->label(__('text.classroom'))
             ])
             ->actions([
+                Tables\Actions\Action::make('updatePassword')
+                    ->icon('heroicon-s-key')
+                    ->label(__('text.change_password'))
+                    ->modalButton(__('text.save'))
+                    ->action(function (Teacher $record, array $data): void {
+                        try {
+                            $record->update([
+                                'password' => Hash::make($data['password'])
+                            ]);
+                            Filament::notify('success', __('text.password_changed_successfully'));
+                        } catch (\Throwable $th) {
+                            Filament::notify('danger', __('text.password_failed_to_change'));
+                        }
+                    })
+                    ->form([
+                        TextInput::make('password')
+                            ->label(__('text.password'))
+                            ->password()
+                            ->minLength(8)
+                    ]),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -90,5 +114,11 @@ class TeacherResource extends Resource
         return [
             'index' => Pages\ManageTeachers::route('/'),
         ];
+    }
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('nip', '!=', auth()->user()->nip);
     }
 }
