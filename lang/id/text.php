@@ -44,7 +44,8 @@ return [
     'password' => 'Password',
     'password_changed_successfully' => 'Password berhasil diubah',
     'password_failed_to_change' => 'Password gagal diubah',
-    'change_password' => 'Ubah password',
+    'change_password' => 'Ubah kata sandi',
+    'password' => 'Kata sandi',
     'save' => 'Simpan',
 
 
@@ -55,6 +56,7 @@ return [
     'student' => 'Murid',
     'student_data' => 'Data murid',
     'teacher' => 'Guru',
+    'user' => 'Pengguna',
     'teacher_data' => 'Data guru',
     'nutrition_measurement' => 'Pengukuran Gizi',
     'male_graph' => 'Grafik siswa',
