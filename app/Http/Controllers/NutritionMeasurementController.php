@@ -20,7 +20,12 @@ class NutritionMeasurementController extends Controller
     public function getAll()
     {
         return new NutritionMeasurementCollection(
-            auth()->user()->student->measurements()->latest()->paginate(5)
+            auth()
+                ->user()
+                ->student
+                ->measurements()
+                ->latest()
+                ->paginate(20)
         );
     }
 }

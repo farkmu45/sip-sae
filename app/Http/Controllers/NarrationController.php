@@ -9,6 +9,10 @@ class NarrationController extends Controller
 {
     public function getAll()
     {
-        return NarrationResource::collection(Narration::where('is_published', true)->latest()->paginate(5));
+        return NarrationResource::collection(
+            Narration::where('is_published', true)
+                ->latest()
+                ->paginate(20)
+        );
     }
 }
