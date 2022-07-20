@@ -41,7 +41,6 @@ class UserResource extends Resource
                     Select::make('student_nis')
                         ->relationship('student', 'name', fn (Builder $query) => $query->has('user', '!='))
                         ->label(__('text.student'))
-                        ->preload()
                         ->required()
                         ->searchable(),
                     TextInput::make('password')

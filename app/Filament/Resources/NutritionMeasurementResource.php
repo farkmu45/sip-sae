@@ -53,6 +53,7 @@ class NutritionMeasurementResource extends Resource
                     ->schema([
                         Select::make('student_nis')
                             ->relationship('student', 'name')
+                            ->searchable()
                             ->label(__('text.name'))
                             ->required(),
                         TextInput::make('weight')
