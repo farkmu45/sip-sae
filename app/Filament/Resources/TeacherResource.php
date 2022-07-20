@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TeacherResource\Pages;
 use App\Models\Teacher;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Str;
@@ -38,22 +39,24 @@ class TeacherResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nip')
-                    ->label(__('text.nip'))
-                    ->unique(ignoreRecord: true)
-                    ->minLength(5)
-                    ->maxLength(5)
-                    ->required(),
-                TextInput::make('name')
-                    ->label(__('text.name'))
-                    ->required(),
-                TextInput::make('address')
-                    ->label(__('text.address'))
-                    ->required(),
-                Select::make('classroom_id')
-                    ->relationship('classroom', 'name')
-                    ->label(__('text.classroom'))
-                    ->required()
+                Card::make([
+                    TextInput::make('nip')
+                        ->label(__('text.nip'))
+                        ->unique(ignoreRecord: true)
+                        ->minLength(5)
+                        ->maxLength(5)
+                        ->required(),
+                    TextInput::make('name')
+                        ->label(__('text.name'))
+                        ->required(),
+                    TextInput::make('address')
+                        ->label(__('text.address'))
+                        ->required(),
+                    Select::make('classroom_id')
+                        ->relationship('classroom', 'name')
+                        ->label(__('text.classroom'))
+                        ->required()
+                ])->columns(2)
             ]);
     }
 
@@ -69,6 +72,7 @@ class TeacherResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('address')
+                    ->sortable()
                     ->label(__('text.address'))
                     ->searchable(),
                 TextColumn::make('classroom.name')
@@ -109,13 +113,15 @@ class TeacherResource extends Resource
             ]);
     }
 
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageTeachers::route('/'),
+            'index' => Pages\ListTeachers::route('/'),
+            'create' => Pages\CreateTeacher::route('/create'),
+            'edit' => Pages\EditTeacher::route('/{record}/edit'),
         ];
     }
-
 
     public static function getEloquentQuery(): Builder
     {
