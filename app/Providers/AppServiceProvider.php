@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Filament\Facades\Filament;
+use Illuminate\Foundation\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,14 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Filament::serving(function () {
-            Filament::registerTheme(mix('css/filament.css'));
+            Filament::registerTheme(
+                app(Vite::class)('resources/css/filament.css'),
+            );
         });
-
-
-        Filament::registerScripts([
-            'https://unpkg.com/flowbite@1.4.7/dist/datepicker.js'
-        ]);
     }
 }
