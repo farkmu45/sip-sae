@@ -8,8 +8,10 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Pages\Page;
 use Illuminate\Support\Str;
 use Filament\Resources\Form;
+use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -55,7 +57,15 @@ class TeacherResource extends Resource
                     Select::make('classroom_id')
                         ->relationship('classroom', 'name')
                         ->label(__('text.classroom'))
-                        ->required()
+                        ->required(),
+                    TextInput::make('password')
+                        ->label(__('text.password'))
+                        ->password()
+                        ->minLength(8)
+                        ->columnSpan(2)
+                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                        ->dehydrated(fn ($state) => filled($state))
+                        ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
                 ])->columns(2)
             ]);
     }
@@ -84,26 +94,6 @@ class TeacherResource extends Resource
                     ->label(__('text.classroom'))
             ])
             ->actions([
-                Tables\Actions\Action::make('updatePassword')
-                    ->icon('heroicon-s-key')
-                    ->label(__('text.change_password'))
-                    ->modalButton(__('text.save'))
-                    ->action(function (Teacher $record, array $data): void {
-                        try {
-                            $record->update([
-                                'password' => Hash::make($data['password'])
-                            ]);
-                            Filament::notify('success', __('text.password_changed_successfully'));
-                        } catch (\Throwable $th) {
-                            Filament::notify('danger', __('text.password_failed_to_change'));
-                        }
-                    })
-                    ->form([
-                        TextInput::make('password')
-                            ->label(__('text.password'))
-                            ->password()
-                            ->minLength(8)
-                    ]),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
 
