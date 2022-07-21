@@ -23,6 +23,7 @@ class TeacherFactory extends Factory
             'address' => fake()->streetAddress(),
             'classroom_id' => fake()->numberBetween(1, 9),
             'password' => Hash::make('password'),
+            'role_id' => 2,
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,9 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Classroom::factory(10)->create();
         \App\Models\Job::factory(10)->create();
-        \App\Models\Teacher::factory(10)->create();
         \App\Models\Narration::factory(10)->create();
         \App\Models\Student::factory(10)->create();
+
+        \App\Models\Role::create([
+            'name' => Role::ADMIN->value,
+        ]);
+
+        \App\Models\Role::create([
+            'name' => Role::TEACHER->value,
+        ]);
+
+        \App\Models\Teacher::factory(10)->create();
 
         \App\Models\Student::create([
             'nis' => 41201510,
@@ -39,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'address' => fake()->streetAddress(),
             'name' => 'Faruk',
             'password' => Hash::make('password'),
+            'role_id' => 1,
         ]);
 
         \App\Models\User::create([

@@ -29,6 +29,16 @@ class Teacher extends Authenticatable implements FilamentUser
         return $this->belongsTo(Classroom::class);
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    // public function role(): string
+    // {
+    //     return $this->belongsTo(Role::class)->name;
+    // }
+
     protected $hidden = [
         'password',
         'remember_token',
