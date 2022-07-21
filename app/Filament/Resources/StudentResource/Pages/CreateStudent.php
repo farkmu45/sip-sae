@@ -11,7 +11,6 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard\Step;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\Concerns\HasWizard;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -41,10 +40,9 @@ class CreateStudent extends CreateRecord
                             ->label(__('text.date_of_birth'))
                             ->maxDate(now())
                             ->rules([
-                                fn ()
-                                => function (string $attribute, $value, Closure $fail) {
+                                fn () => function (string $attribute, $value, Closure $fail) {
                                     $studentAge = Carbon::parse($value)->age;
-                                    $studentDOB =  Carbon::parse($value);
+                                    $studentDOB = Carbon::parse($value);
                                     $currentDate = Carbon::parse(now());
                                     $studentDOBConverted = $studentDOB->year($currentDate->year);
                                     $monthDifference = $currentDate->diffInMonths($studentDOBConverted);
@@ -56,7 +54,7 @@ class CreateStudent extends CreateRecord
                                     } else {
                                         $fail(__('text.invalid_age'));
                                     }
-                                }
+                                },
                             ])
                             ->required(),
                         Select::make('classroom_id')
@@ -73,7 +71,7 @@ class CreateStudent extends CreateRecord
                             ])
                             ->required(),
                     ])
-                        ->columns(2)
+                        ->columns(2),
                 ]),
             Step::make(__('text.parents_data'))
                 ->schema([
@@ -88,7 +86,7 @@ class CreateStudent extends CreateRecord
                                 [
                                     TextInput::make('name')
                                         ->label(__('text.job'))
-                                        ->required()
+                                        ->required(),
                                 ]
                             ),
                         TextInput::make('salary')
@@ -100,8 +98,8 @@ class CreateStudent extends CreateRecord
                         TextInput::make('marital_status_of_parents')
                             ->label(__('text.marital_status'))
                             ->required()
-                            ->columnSpan(2)
-                    ])->columns(2)
+                            ->columnSpan(2),
+                    ])->columns(2),
                 ]),
             Step::make(__('text.other_information'))
                 ->schema([
@@ -109,9 +107,9 @@ class CreateStudent extends CreateRecord
                         TextInput::make('school_distance')
                             ->label(__('text.school_distance'))
                             ->required()
-                            ->numeric()
-                    ])
-                ])
+                            ->numeric(),
+                    ]),
+                ]),
         ];
     }
 }

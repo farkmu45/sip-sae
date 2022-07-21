@@ -13,7 +13,7 @@ class NarrationResource extends JsonResource
             'title' => $this->title,
             'picture' => $this->picture,
             'content' => $this->content,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
         ];
     }
 }

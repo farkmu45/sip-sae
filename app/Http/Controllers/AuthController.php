@@ -20,7 +20,7 @@ class AuthController extends Controller
 
         $user = User::where('student_nis', $request->nis)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'nis' => [__('auth.failed')],
             ]);
@@ -28,7 +28,6 @@ class AuthController extends Controller
 
         return new UserResource($user);
     }
-
 
     public function register(RegisterPostRequest $request)
     {
@@ -42,7 +41,7 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return [
-            'data' => ['message' => 'Berhasil logout']
+            'data' => ['message' => 'Berhasil logout'],
         ];
     }
 }

@@ -4,13 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Enums\Gender;
 use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use Carbon\Carbon;
 use Closure;
-use Illuminate\Support\Str;
-use Filament\Forms;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
@@ -21,16 +17,17 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\MultiSelectFilter;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
+
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-identification';
+
     public static function getModelLabel(): string
     {
         return Str::lower(__('text.student_data'));
@@ -64,10 +61,9 @@ class StudentResource extends Resource
                                 ->label(__('text.date_of_birth'))
                                 ->maxDate(now())
                                 ->rules([
-                                    fn ()
-                                    => function (string $attribute, $value, Closure $fail) {
+                                    fn () => function (string $attribute, $value, Closure $fail) {
                                         $studentAge = Carbon::parse($value)->age;
-                                        $studentDOB =  Carbon::parse($value);
+                                        $studentDOB = Carbon::parse($value);
                                         $currentDate = Carbon::parse(now());
                                         $studentDOBConverted = $studentDOB->year($currentDate->year);
                                         $monthDifference = $currentDate->diffInMonths($studentDOBConverted);
@@ -79,7 +75,7 @@ class StudentResource extends Resource
                                         } else {
                                             $fail(__('text.invalid_age'));
                                         }
-                                    }
+                                    },
                                 ])
                                 ->required(),
                             Select::make('classroom_id')
@@ -100,7 +96,6 @@ class StudentResource extends Resource
                     )
                     ->columns(2),
 
-
                 Section::make(__('text.parents_data'))
                     ->schema([
                         Select::make('job_id')
@@ -113,7 +108,7 @@ class StudentResource extends Resource
                                 [
                                     TextInput::make('name')
                                         ->label(__('text.job'))
-                                        ->required()
+                                        ->required(),
                                 ]
                             ),
                         TextInput::make('salary')
@@ -126,7 +121,7 @@ class StudentResource extends Resource
                             ->label(__('text.marital_status'))
                             ->maxLength(45)
                             ->required()
-                            ->columnSpan(2)
+                            ->columnSpan(2),
                     ])
                     ->columns(2),
 
@@ -135,8 +130,8 @@ class StudentResource extends Resource
                         TextInput::make('school_distance')
                             ->label(__('text.school_distance'))
                             ->required()
-                            ->numeric()
-                    ])
+                            ->numeric(),
+                    ]),
             ]);
     }
 
@@ -157,12 +152,12 @@ class StudentResource extends Resource
                     ->label(__('text.classroom')),
                 TextColumn::make('address')
                     ->searchable()
-                    ->label(__('text.address'))
+                    ->label(__('text.address')),
             ])
             ->filters([
                 SelectFilter::make('classroom_id')
                     ->relationship('classroom', 'name')
-                    ->label(__('text.classroom'))
+                    ->label(__('text.classroom')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

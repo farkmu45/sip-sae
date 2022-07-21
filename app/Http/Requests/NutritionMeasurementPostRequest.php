@@ -15,7 +15,7 @@ class NutritionMeasurementPostRequest extends FormRequest
     {
         return [
             'weight' => 'required|min:1',
-            'height' => 'required|min:1'
+            'height' => 'required|min:1',
         ];
     }
 }

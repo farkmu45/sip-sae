@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NutritionMeasurementResource\Pages;
-use App\Filament\Resources\NutritionMeasurementResource\RelationManagers;
 use App\Filament\Resources\NutritionMeasurementResource\Widgets\AnthropometryChart;
 use App\Models\NutritionMeasurement;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -14,12 +12,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
-use Illuminate\Support\Str;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NutritionMeasurementResource extends Resource
 {
@@ -69,7 +64,7 @@ class NutritionMeasurementResource extends Resource
                             ->numeric()
                             ->minValue(1)
                             ->columnSpan([
-                                'md' => 2
+                                'md' => 2,
                             ]),
                     ])
                     ->columns(2)
@@ -114,7 +109,7 @@ class NutritionMeasurementResource extends Resource
                 TextColumn::make('imt')
                     ->label(__('text.imt'))
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -134,10 +129,10 @@ class NutritionMeasurementResource extends Resource
         ];
     }
 
-    public static function getWidgets() : array
+    public static function getWidgets(): array
     {
         return [
-            AnthropometryChart::class
+            AnthropometryChart::class,
         ];
     }
 

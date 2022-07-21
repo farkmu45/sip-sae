@@ -14,8 +14,11 @@ class Student extends Model
     use HasFactory;
 
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [''];
+
     protected $primaryKey = 'nis';
 
     protected function age(): Attribute
@@ -29,7 +32,7 @@ class Student extends Model
     {
         return Attribute::make(
             get: function ($value, $attributes) {
-                $studentDOB =  Carbon::parse($attributes['date_of_birth']);
+                $studentDOB = Carbon::parse($attributes['date_of_birth']);
                 $currentDate = Carbon::parse(now());
                 $studentDOBConverted = $studentDOB->year($currentDate->year);
                 $monthDifference = $currentDate->diffInMonths($studentDOBConverted);
@@ -39,11 +42,10 @@ class Student extends Model
         );
     }
 
-    public function user() : HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(User::class, 'student_nis');
     }
-
 
     public function classroom(): BelongsTo
     {

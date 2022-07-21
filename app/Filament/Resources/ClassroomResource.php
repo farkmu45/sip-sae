@@ -3,28 +3,26 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClassroomResource\Pages;
-use App\Filament\Resources\ClassroomResource\RelationManagers;
 use App\Filament\Resources\ClassroomResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\ClassroomResource\RelationManagers\TeachersRelationManager;
 use App\Models\Classroom;
-use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Support\Str;
 use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ClassroomResource extends Resource
 {
     protected static ?string $model = Classroom::class;
 
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     public static function getModelLabel(): string
@@ -39,8 +37,8 @@ class ClassroomResource extends Resource
                 Card::make([
                     TextInput::make('name')
                         ->label(__('text.name'))
-                        ->required()
-                ])
+                        ->required(),
+                ]),
             ]);
     }
 
@@ -68,7 +66,7 @@ class ClassroomResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -76,7 +74,7 @@ class ClassroomResource extends Resource
     {
         return [
             TeachersRelationManager::class,
-            StudentsRelationManager::class
+            StudentsRelationManager::class,
         ];
     }
 

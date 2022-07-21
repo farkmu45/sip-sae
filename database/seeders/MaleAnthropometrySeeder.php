@@ -6,7 +6,6 @@ use JeroenZwart\CsvSeeder\CsvSeeder;
 
 class MaleAnthropometrySeeder extends CsvSeeder
 {
-
     public function __construct()
     {
         $this->tablename = 'male_anthropometry';

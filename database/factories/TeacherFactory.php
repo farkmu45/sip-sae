@@ -21,8 +21,8 @@ class TeacherFactory extends Factory
             'nip' => fake()->randomNumber(5),
             'name' => fake()->name(),
             'address' => fake()->streetAddress(),
-            'classroom_id' => fake()->numberBetween(1,9),
-            'password' => Hash::make('password')
+            'classroom_id' => fake()->numberBetween(1, 9),
+            'password' => Hash::make('password'),
         ];
     }
 }

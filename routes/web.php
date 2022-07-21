@@ -1,11 +1,5 @@
 <?php
 
-use App\Models\MaleAnthropometry;
-use App\Models\NutritionMeasurement;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

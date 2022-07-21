@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\ClassroomResource\RelationManagers;
 
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -10,15 +9,12 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeachersRelationManager extends RelationManager
 {
     protected static string $relationship = 'teachers';
 
     protected static ?string $recordTitleAttribute = 'name';
-
 
     public static function getModelLabel(): string
     {
@@ -51,7 +47,7 @@ class TeachersRelationManager extends RelationManager
                     ->searchable(),
                 TextColumn::make('address')
                     ->label(__('text.address'))
-                    ->searchable()
+                    ->searchable(),
             ])
             ->filters([
                 //

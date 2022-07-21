@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class QuestionResource extends JsonResource
@@ -13,7 +12,7 @@ class QuestionResource extends JsonResource
             'id' => $this->id,
             'student' => $this->student->name,
             'question' => $this->question,
-            'answer' => $this->answer
+            'answer' => $this->answer,
         ];
     }
 }

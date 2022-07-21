@@ -9,18 +9,20 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
-use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function getModelLabel(): string
@@ -47,8 +49,8 @@ class UserResource extends Resource
                         ->password()
                         ->label(__('text.password'))
                         ->required()
-                        ->minLength(8)
-                ])->columns()
+                        ->minLength(8),
+                ])->columns(),
             ]);
     }
 
@@ -66,7 +68,7 @@ class UserResource extends Resource
                 TextColumn::make('student.classroom.name')
                     ->label(__('text.classroom'))
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -79,7 +81,7 @@ class UserResource extends Resource
                     ->action(function (User $record, array $data): void {
                         try {
                             $record->update([
-                                'password' => Hash::make($data['password'])
+                                'password' => Hash::make($data['password']),
                             ]);
                             Filament::notify('success', __('text.password_changed_successfully'));
                         } catch (\Throwable $th) {
@@ -90,7 +92,7 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->label(__('text.password'))
                             ->password()
-                            ->minLength(8)
+                            ->minLength(8),
                     ]),
             ])
             ->bulkActions([

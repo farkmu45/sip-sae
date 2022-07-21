@@ -17,7 +17,7 @@ class ClassroomFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->word()
+            'name' => fake()->word(),
         ];
     }
 }

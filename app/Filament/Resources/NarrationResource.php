@@ -21,7 +21,9 @@ use Livewire\Component;
 class NarrationResource extends Resource
 {
     protected static ?string $model = Narration::class;
+
     protected static ?string $recordTitleAttribute = 'title';
+
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     public static function getModelLabel(): string
@@ -54,7 +56,7 @@ class NarrationResource extends Resource
                 Textarea::make('content')
                     ->label(__('text.content'))
                     ->required(),
-            ])
+            ]),
         ]);
     }
 
@@ -72,11 +74,11 @@ class NarrationResource extends Resource
                     ->label(__('text.content'))
                     ->sortable()
                     ->searchable()
-                    ->limit(50)
+                    ->limit(50),
             ])
             ->filters([
                 TernaryFilter::make('is_published')
-                    ->label(__('text.is_published'))
+                    ->label(__('text.is_published')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

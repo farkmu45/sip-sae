@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -13,6 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory;
 
     public $incrementing = false;
+
     protected $primaryKey = 'student_nis';
 
     protected $fillable = [
@@ -22,7 +22,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password'
+        'password',
     ];
 
     public function student(): BelongsTo

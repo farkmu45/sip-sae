@@ -26,7 +26,7 @@ class StudentFactory extends Factory
             'salary' => fake()->randomNumber(),
             'job_id' => fake()->numberBetween(1, 9),
             'classroom_id' => fake()->numberBetween(1, 9),
-            'gender' => fake()->randomElement(['FEMALE', 'MALE'])
+            'gender' => fake()->randomElement(['FEMALE', 'MALE']),
         ];
     }
 }

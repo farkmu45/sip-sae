@@ -12,7 +12,7 @@ class UserResource extends JsonResource
             'name' => $this->student->name,
             'nis' => $this->student_nis,
             'classroom' => $this->student->classroom->name,
-            'token' => $this->createToken($request->getClientIp())->plainTextToken
+            'token' => $this->createToken($request->getClientIp())->plainTextToken,
         ];
     }
 }

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'salary' => 1500,
             'job_id' => 1,
             'classroom_id' => 1,
-            'gender' => 'MALE'
+            'gender' => 'MALE',
         ]);
 
         \App\Models\Teacher::create([
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MaleAnthropometrySeeder::class,
             FemaleAnthropometrySeeder::class,
-            NutritionalStatusesSeeder::class
+            NutritionalStatusesSeeder::class,
         ]);
     }
 }

@@ -34,6 +34,7 @@ class NutritionMeasurement extends Model
     {
         $height = $nutritionMeasurement->height / 100;
         $weight = $nutritionMeasurement->weight;
+
         return round($weight / pow($height, 2), 3);
     }
 
@@ -45,7 +46,7 @@ class NutritionMeasurement extends Model
 
         $whereClause = [
             ['year', '=', $student->age],
-            ['month', '=', $student->ageMonth]
+            ['month', '=', $student->ageMonth],
         ];
 
         if ($student->gender == Gender::MALE->value) {

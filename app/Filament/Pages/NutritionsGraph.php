@@ -9,19 +9,21 @@ use App\Models\Student;
 use Carbon\Carbon;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 
 class NutritionsGraph extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+
     protected static string $view = 'filament.pages.nutritions-graph';
 
     public $start;
+
     public $end;
+
     public $classroomId;
+
     public $studentId;
 
     protected $queryString = ['start', 'end', 'classroomId', 'studentId'];
@@ -42,7 +44,7 @@ class NutritionsGraph extends Page
             'start' => $this->start ?? Carbon::now()->subDays(7)->format('Y-m-d'),
             'end' => $this->end ?? Carbon::now()->format('Y-m-d'),
             'classroomId' => $this->classroomId,
-            'studentId' => $this->studentId
+            'studentId' => $this->studentId,
         ]);
     }
 
@@ -63,8 +65,7 @@ class NutritionsGraph extends Page
                 Select::make('classroomId')
                     ->options(Classroom::all()->pluck('name', 'id'))
                     ->placeholder(__('text.all_classroom'))
-                    ->afterStateUpdated(function (callable $set)
-                    {
+                    ->afterStateUpdated(function (callable $set) {
                         $set('studentId', null);
                     })
                     ->reactive()
@@ -74,6 +75,7 @@ class NutritionsGraph extends Page
                     ->options(function (callable $get) {
                         if ($get('classroomId')) {
                             $student = Student::where('classroom_id', '=', $get('classroomId'))->pluck('name', 'nis');
+
                             return $student;
                         } else {
                             return Student::all()->pluck('name', 'nis');
@@ -81,8 +83,8 @@ class NutritionsGraph extends Page
                     })
                     ->searchable()
                     ->placeholder(__('text.all_student'))
-                    ->label(__('text.student'))
-            ])->columns(2)
+                    ->label(__('text.student')),
+            ])->columns(2),
 
         ];
     }
@@ -94,12 +96,11 @@ class NutritionsGraph extends Page
         redirect($url);
     }
 
-
     protected function getFooterWidgets(): array
     {
         return [
             MaleAnthropometryChart::class,
-            FemaleAnthropometryChart::class
+            FemaleAnthropometryChart::class,
         ];
     }
 }

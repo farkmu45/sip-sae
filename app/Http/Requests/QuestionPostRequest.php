@@ -15,7 +15,7 @@ class QuestionPostRequest extends FormRequest
     {
         return [
             'question' => 'required|string|max:45',
-            'answer' => 'required|string|max:45'
+            'answer' => 'required|string|max:45',
         ];
     }
 

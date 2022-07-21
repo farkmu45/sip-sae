@@ -48,7 +48,6 @@ return [
     'password' => 'Kata sandi',
     'save' => 'Simpan',
 
-
     'nutritions_graph' => 'Grafik Gizi',
     'nutrition_type' => 'Jenis gizi',
     'narration' => 'Narasi',

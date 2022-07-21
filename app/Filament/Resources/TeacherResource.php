@@ -4,12 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeacherResource\Pages;
 use App\Models\Teacher;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
-use Illuminate\Support\Str;
 use Filament\Resources\Form;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Resource;
@@ -19,11 +17,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\MultiSelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
+
     protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function getModelLabel(): string
@@ -35,7 +36,6 @@ class TeacherResource extends Resource
     {
         return Str::lower(__('text.teacher'));
     }
-
 
     public static function form(Form $form): Form
     {
@@ -65,8 +65,8 @@ class TeacherResource extends Resource
                         ->columnSpan(2)
                         ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                         ->dehydrated(fn ($state) => filled($state))
-                        ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
-                ])->columns(2)
+                        ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord),
+                ])->columns(2),
             ]);
     }
 
@@ -86,12 +86,12 @@ class TeacherResource extends Resource
                     ->label(__('text.address'))
                     ->searchable(),
                 TextColumn::make('classroom.name')
-                    ->label(__('text.classroom'))
+                    ->label(__('text.classroom')),
             ])
             ->filters([
                 MultiSelectFilter::make('classroom_id')
                     ->relationship('classroom', 'name')
-                    ->label(__('text.classroom'))
+                    ->label(__('text.classroom')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -102,7 +102,6 @@ class TeacherResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
 
     public static function getPages(): array
     {

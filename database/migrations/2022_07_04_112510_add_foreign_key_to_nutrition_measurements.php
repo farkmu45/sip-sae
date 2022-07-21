@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\NutritionalStatus;
-use App\Models\NutritionType;
-use App\Models\Student;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +20,6 @@ return new class extends Migration
                 ->on('students')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-
 
             $table->after('student_nis', function (Blueprint $table) {
                 $table->foreignIdFor(NutritionalStatus::class)

@@ -11,9 +11,10 @@ class NutritionalStatus extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
     public $timestamps = false;
 
-    public function measurements() : HasMany
+    public function measurements(): HasMany
     {
         return $this->hasMany(NutritionMeasurement::class);
     }

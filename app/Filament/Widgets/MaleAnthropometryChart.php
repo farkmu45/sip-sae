@@ -11,7 +11,9 @@ use Filament\Widgets\ScatterChartWidget;
 class MaleAnthropometryChart extends ScatterChartWidget
 {
     protected int | string | array $columnSpan = 'full';
+
     protected static ?string $pollingInterval = null;
+
     public $records = null;
 
     public function mount()
@@ -22,7 +24,7 @@ class MaleAnthropometryChart extends ScatterChartWidget
         $classroomId = request()->classroomId;
 
         $this->records = NutritionMeasurement::whereBetween('created_at', [$startDate, $endDate])
-            ->whereHas('student', function ($q) use($classroomId, $studentId) {
+            ->whereHas('student', function ($q) use ($classroomId, $studentId) {
                 $q->where('gender', Gender::MALE->value);
 
                 if ($classroomId) {
@@ -52,7 +54,7 @@ class MaleAnthropometryChart extends ScatterChartWidget
             ['median', '#86af8b'],
             ['+1sd', '#deb57b'],
             ['+2sd', '#b7556b'],
-            ['+3sd', '#302f2e']
+            ['+3sd', '#302f2e'],
         ];
 
         $anthropometry = MaleAnthropometry::where('month', '=', 0)
@@ -71,7 +73,7 @@ class MaleAnthropometryChart extends ScatterChartWidget
             foreach ($anthropometryArray as $anthropometry) {
                 array_push($data, [
                     'y' => $anthropometry[$sd[0]],
-                    'x' => round((float)"$anthropometry->year.$anthropometry->month", 3)
+                    'x' => round((float) "$anthropometry->year.$anthropometry->month", 3),
                 ]);
             }
 
@@ -79,7 +81,7 @@ class MaleAnthropometryChart extends ScatterChartWidget
                 'label' => strtoupper($sd[0]),
                 'data' => $data,
                 'borderColor' => $sd[1],
-                'pointRadius' => 0
+                'pointRadius' => 0,
             ]);
 
             $data = [];
@@ -94,8 +96,8 @@ class MaleAnthropometryChart extends ScatterChartWidget
                 'data' => [
                     [
                         'y' => $measurement->imt,
-                        'x' => (float) "$age.$ageMonth"
-                    ]
+                        'x' => (float) "$age.$ageMonth",
+                    ],
                 ],
                 'pointRadius' => 8,
                 'pointBackgroundColor' => 'blue',
@@ -118,15 +120,15 @@ class MaleAnthropometryChart extends ScatterChartWidget
                     'min' => 5,
                     'max' => 19,
                     'ticks' => [
-                        'stepSize' => 1
-                    ]
-                ]
+                        'stepSize' => 1,
+                    ],
+                ],
             ],
             'plugins' => [
                 'legend' => [
-                    'display' => false
-                ]
-            ]
+                    'display' => false,
+                ],
+            ],
         ];
     }
 }

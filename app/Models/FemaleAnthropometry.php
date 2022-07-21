@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class FemaleAnthropometry extends Model
 {
     public $timestamps = false;
+
     protected $table = 'female_anthropometry';
 }

@@ -6,7 +6,6 @@ use App\Http\Requests\NutritionMeasurementPostRequest;
 use App\Http\Resources\NutritionMeasurementCollection;
 use App\Http\Resources\NutritionMeasurementResource;
 use App\Models\NutritionMeasurement;
-use Illuminate\Http\Request;
 
 class NutritionMeasurementController extends Controller
 {
@@ -14,6 +13,7 @@ class NutritionMeasurementController extends Controller
     {
         $data = $request->validated();
         $data['student_nis'] = auth()->user()->student_nis;
+
         return new NutritionMeasurementResource(NutritionMeasurement::create($data));
     }
 

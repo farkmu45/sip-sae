@@ -12,6 +12,7 @@ class Classroom extends Model
     use HasFactory, SoftDeletes;
 
     public $timestamps = false;
+
     protected $guarded = ['id'];
 
     public function teachers(): HasMany
