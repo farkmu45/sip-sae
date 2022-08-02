@@ -17,7 +17,7 @@ class Teacher extends Authenticatable implements FilamentUser
 
     protected $primaryKey = 'nip';
 
-    protected $guarded = ['nip', 'email'];
+    protected $guarded = ['email'];
 
     public function canAccessFilament(): bool
     {
