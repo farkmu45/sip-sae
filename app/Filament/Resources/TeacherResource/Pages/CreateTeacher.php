@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TeacherResource\Pages;
 
+use App\Enums\Role;
 use App\Filament\Resources\TeacherResource;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -11,7 +12,8 @@ class CreateTeacher extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['role_id'] = 2;
+        $data['role_id'] = Role::TEACHER->value;
+
         return $data;
     }
 }

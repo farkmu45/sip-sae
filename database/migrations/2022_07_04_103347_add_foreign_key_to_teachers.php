@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::table('teachers', function (Blueprint $table) {
             $table->after('nip', function (Blueprint $table) {
                 $table->foreignIdFor(Classroom::class)
+                    ->nullable()
                     ->constrained()
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
