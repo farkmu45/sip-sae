@@ -12,7 +12,7 @@ class TeacherPolicy
 
     public function viewAny(Teacher $user)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value;
     }
 
     public function view(Teacher $user, Teacher $teacher)
@@ -22,26 +22,26 @@ class TeacherPolicy
 
     public function create(Teacher $user)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value;
     }
 
     public function update(Teacher $user, Teacher $teacher)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value && $teacher->role_id = Role::TEACHER->value;
     }
 
     public function delete(Teacher $user, Teacher $teacher)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value && $teacher->role_id = Role::TEACHER->value;
     }
 
     public function restore(Teacher $user, Teacher $teacher)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value;
     }
 
     public function deleteAny(Teacher $user)
     {
-        return $user->role->name == Role::ADMIN->value;
+        return $user->role_id == Role::ADMIN->value;
     }
 }
