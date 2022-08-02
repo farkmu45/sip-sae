@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->string('nip')->primary();
+            $table->string('nip', 18)->primary();
             $table->string('name', 45);
             $table->string('email')->virtualAs("concat(nip,'@sipsae.com')");
             $table->string('address', 45);

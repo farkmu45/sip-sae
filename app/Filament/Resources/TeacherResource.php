@@ -45,8 +45,8 @@ class TeacherResource extends Resource
                     TextInput::make('nip')
                         ->label(__('text.nip'))
                         ->unique(ignoreRecord: true)
-                        ->minLength(5)
-                        ->maxLength(5)
+                        ->minLength(18)
+                        ->maxLength(18)
                         ->required(),
                     TextInput::make('name')
                         ->label(__('text.name'))
