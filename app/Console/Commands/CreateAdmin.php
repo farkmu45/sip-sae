@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-class CreateMasterAdmin extends Command
+class CreateAdmin extends Command
 {
     use WithInputValidation;
 
