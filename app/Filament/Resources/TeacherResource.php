@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\Role;
 use App\Filament\Resources\TeacherResource\Pages;
 use App\Models\Teacher;
 use Filament\Forms\Components\Card;
@@ -114,6 +115,6 @@ class TeacherResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('nip', '!=', auth()->user()->nip);
+        return parent::getEloquentQuery()->where([['nip', '!=', auth()->user()->nip], ['role_id', '!=', Role::ADMIN->value]]);
     }
 }
