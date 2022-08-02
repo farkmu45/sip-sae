@@ -60,4 +60,8 @@ return [
     'nutrition_measurement' => 'Pengukuran Gizi',
     'male_graph' => 'Grafik siswa',
     'female_graph' => 'Grafik siswi',
+
+    'total_teachers' => 'Total guru',
+    'total_of_registered_students' => 'Total siswa yang sudah mendaftar',
+    'total_of_unregistered_students' => 'Total siswa yang belum mendaftar',
 ];
