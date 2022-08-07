@@ -19,8 +19,8 @@ class StatsOverview extends BaseWidget
 
         return [
             Card::make(__('text.total_teachers'), $teachersCount),
-            Card::make(__('text.total_of_registered_students'), $studentsCount),
-            Card::make(__('text.total_of_unregistered_students'), $usersCount),
+            Card::make(__('text.total_of_registered_students'), $usersCount),
+            Card::make(__('text.total_of_unregistered_students'), $studentsCount),
         ];
     }
 }
