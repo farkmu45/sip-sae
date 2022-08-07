@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\LatestNarration;
 use App\Filament\Widgets\StatsOverview;
 use Filament\Pages\Page;
 
@@ -17,6 +18,7 @@ class Dashboard extends Page
     {
         return [
             StatsOverview::class,
+            LatestNarration::class
         ];
     }
 }
