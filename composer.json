@@ -10,10 +10,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.15",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "jeroenzwart/laravel-csv-seeder": "^1.6",
         "laravel-lang/lang": "^11.0",
