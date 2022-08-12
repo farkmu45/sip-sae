@@ -57,6 +57,8 @@ class TeacherResource extends Resource
                         ->required(),
                     Select::make('classroom_id')
                         ->relationship('classroom', 'name')
+                        ->preload()
+                        ->searchable()
                         ->label(__('text.classroom'))
                         ->required(),
                     TextInput::make('password')
