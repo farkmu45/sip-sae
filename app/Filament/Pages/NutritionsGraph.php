@@ -92,7 +92,7 @@ class NutritionsGraph extends Page
     public function submit(): void
     {
         $this->validate();
-        $url = "/admin/nutritions-graph?start=$this->start&end=$this->end&classroomId=$this->classroomId&studentId=$this->studentId";
+        $url = "/nutritions-graph?start=$this->start&end=$this->end&classroomId=$this->classroomId&studentId=$this->studentId";
         redirect($url);
     }
 
