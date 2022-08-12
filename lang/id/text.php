@@ -9,7 +9,7 @@ return [
     'date_of_birth' => 'Tanggal lahir',
     'job' => 'Pekerjaan orang tua',
     'marital_status' => 'Status pernikahan orang tua',
-    'school_distance' => 'Jarak sekolah',
+    'school_distance' => 'Jarak sekolah (km)',
     'salary' => 'Pendapatan',
     'nis' => 'NIS',
     'nip' => 'NIP',
