@@ -20,7 +20,7 @@ class TeacherSeeder extends Seeder
             'nip' => 'admin1',
             'address' => fake()->streetAddress(),
             'name' => 'Admin1',
-            'password' => Hash::make('sipsae123'),
+            'password' => '$2y$10$hiknmmzerBhpwyTywqvrsu4j.xCUbKM.n3TT8DxJORxtxVw71KdOW',
             'role_id' => 1,
         ]);
 
@@ -28,7 +28,7 @@ class TeacherSeeder extends Seeder
             'nip' => 'admin_kelas',
             'address' => fake()->streetAddress(),
             'name' => 'Admin Kelas',
-            'password' => Hash::make('sipsae123'),
+            'password' => '$2y$10$hiknmmzerBhpwyTywqvrsu4j.xCUbKM.n3TT8DxJORxtxVw71KdOW',
             'role_id' => 1,
         ]);
 
@@ -36,7 +36,7 @@ class TeacherSeeder extends Seeder
             'nip' => 'admin_sekolah',
             'address' => fake()->streetAddress(),
             'name' => 'Admin Sekolah',
-            'password' => Hash::make('sipsae123'),
+            'password' => '$2y$10$hiknmmzerBhpwyTywqvrsu4j.xCUbKM.n3TT8DxJORxtxVw71KdOW',
             'role_id' => 1,
         ]);
     }
