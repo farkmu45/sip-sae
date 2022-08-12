@@ -27,7 +27,9 @@ class CreateStudent extends CreateRecord
                 ->schema([
                     Card::make([
                         TextInput::make('nis')
+                            ->unique(ignoreRecord: true)
                             ->numeric()
+                            ->length(8)
                             ->label(__('text.nis'))
                             ->required(),
                         TextInput::make('name')
