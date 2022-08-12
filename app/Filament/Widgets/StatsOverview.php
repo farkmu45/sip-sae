@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Enums\Role;
 use App\Models\Student;
 use App\Models\Teacher;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -13,7 +14,7 @@ class StatsOverview extends BaseWidget
 
     protected function getCards(): array
     {
-        $teachersCount = Teacher::count();
+        $teachersCount = Teacher::where('role_id', '=', Role::TEACHER->value)->count();
         $studentsCount = Student::has('user', '!=')->count();
         $usersCount = Student::has('user')->count();
 
