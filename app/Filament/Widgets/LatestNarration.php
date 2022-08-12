@@ -9,7 +9,7 @@ class LatestNarration extends Widget
 {
     protected function getViewData(): array
     {
-        return ['narration' => Narration::latest()->first()];
+        return ['narration' => Narration::where('is_published', '=', true)->latest()->first()];
     }
 
     protected int | string | array $columnSpan = 'full';
