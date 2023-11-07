@@ -11,7 +11,7 @@ return [
     'marital_status' => 'Status pernikahan orang tua',
     'school_distance' => 'Jarak sekolah (km)',
     'salary' => 'Pendapatan',
-    'nis' => 'NIS',
+    'nis' => 'NIM',
     'nip' => 'NIP',
     'student_data' => 'Data Murid',
     'parents_data' => 'Data Orang Tua',
@@ -58,10 +58,10 @@ return [
     'user' => 'Pengguna',
     'teacher_data' => 'Data guru',
     'nutrition_measurement' => 'Pengukuran Gizi',
-    'male_graph' => 'Grafik siswa',
-    'female_graph' => 'Grafik siswi',
+    'male_graph' => 'Grafik mahasiswa',
+    'female_graph' => 'Grafik mahasiswi',
 
     'total_teachers' => 'Total guru',
-    'total_of_registered_students' => 'Total siswa yang sudah mendaftar',
-    'total_of_unregistered_students' => 'Total siswa yang belum mendaftar',
+    'total_of_registered_students' => 'Total murid yang sudah mendaftar',
+    'total_of_unregistered_students' => 'Total murid yang belum mendaftar',
 ];
